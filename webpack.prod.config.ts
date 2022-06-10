@@ -9,7 +9,8 @@ const domain = process.env.PRODUCTION_DOMAIN;
 const config: Configuration = merge(commonConfig, {
   mode: 'production',
   output: {
-    filename: '[name].[contenthash].js'
+    filename: '[name].[contenthash].js',
+    publicPath: '/container/latest/'
   },
   plugins: [
     new WebpackContainer.ModuleFederationPlugin({
