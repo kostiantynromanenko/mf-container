@@ -1,8 +1,8 @@
-import path from 'path';
 import { Configuration as WebpackConfiguration, container as WebpackContainer } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
+import { dependencies } from './package.json';
 import commonConfig from './webpack.common.config';
 
 import { merge } from 'webpack-merge';
@@ -18,48 +18,19 @@ const config: Configuration = merge(commonConfig, {
       template: 'public/index.html'
     }),
     new WebpackContainer.ModuleFederationPlugin({
-      name: 'listApp',
-      filename: 'remoteEntry.js',
-      exposes: {
-        './List': './src/boostrap'
-      }
+      name: 'container',
+      remotes: {
+        list: 'list@http://localhost:4001/remoteEntry.js'
+      },
+      shared: dependencies
     })
   ],
   devServer: {
     historyApiFallback: true,
-    port: 4001,
+    port: 4000,
     hot: true
   },
   devtool: 'inline-source-map'
 });
 
 export default config;
-
-// const config: Configuration = {
-//   entry: './src/index'
-//   plugins: [
-//     new HtmlWebpackPlugin({
-//       template: 'public/index.html'
-//     }),
-//     new WebpackContainer.ModuleFederationPlugin({
-//       name: 'listApp',
-//       filename: 'remoteEntry.js',
-//       exposes: {
-//         './List': './src/list/List'
-//       },
-//       shared: {
-//         react: {
-//           singleton: true
-//         }
-//       }
-//       // shared: {
-//       //   react: { singleton: true, eager: true, requiredVersion: dependencies.react },
-//       //   'react-dom': {
-//       //     singleton: true,
-//       //     eager: true,
-//       //     requiredVersion: dependencies['react-dom']
-//       //   }
-//       // }
-//     })
-//   ],
-// };

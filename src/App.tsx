@@ -1,14 +1,14 @@
 import { Header } from './feature/ui/header';
 import React, { Suspense } from 'react';
 
-const RemoteListApp = React.lazy(() => import('listApp/List'));
+import { ListApp } from './apps';
 
 const App = () => {
   return (
     <>
       <Header />
       <Suspense fallback="Loading remote component">
-        <RemoteListApp />
+        <ListApp />
       </Suspense>
     </>
   );
