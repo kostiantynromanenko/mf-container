@@ -6,6 +6,8 @@ import { dependencies } from './package.json';
 
 const domain = process.env.PRODUCTION_DOMAIN;
 
+console.log('domain: ' + domain);
+
 const config: Configuration = merge(commonConfig, {
   mode: 'production',
   output: {
