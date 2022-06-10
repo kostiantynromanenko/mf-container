@@ -8,6 +8,8 @@ jobs:
       - name: Run install
         run: npm install
       - name: Run build
+        env:
+          PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN }}
         run: npm run build
       - uses: shinyinc/action-aws-cli@v1.2
       - name: Upload to S3
