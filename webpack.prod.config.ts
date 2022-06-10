@@ -18,7 +18,7 @@ const config: Configuration = merge(commonConfig, {
     new WebpackContainer.ModuleFederationPlugin({
       name: 'container',
       remotes: {
-        list: `list@${domain}/list/remoteEntry.js`
+        list: `list@${domain}/list/latest/remoteEntry.js`
       },
       shared: dependencies
     })
