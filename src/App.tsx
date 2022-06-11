@@ -1,15 +1,12 @@
-import { Header } from './feature/ui/header';
-import React, { Suspense } from 'react';
-
+import React from 'react';
+import { Header } from './features/layout/header';
 import { ListApp } from './apps';
 
 const App = () => {
   return (
     <>
       <Header />
-      <Suspense fallback="Loading remote component">
-        <ListApp />
-      </Suspense>
+      <ListApp />
     </>
   );
 };

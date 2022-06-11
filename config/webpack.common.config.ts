@@ -17,6 +17,13 @@ const config: Configuration = {
                 {
                   regenerator: true
                 }
+              ],
+              [
+                '@emotion',
+                {
+                  autoLabel: 'always',
+                  labelFormat: 'ca-[local]'
+                }
               ]
             ]
           }

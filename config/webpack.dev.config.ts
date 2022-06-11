@@ -3,7 +3,7 @@ import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-serv
 import { merge } from 'webpack-merge';
 
 import commonConfig from './webpack.common.config';
-import { dependencies } from './package.json';
+import { dependencies } from '../package.json';
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
@@ -17,7 +17,17 @@ const config: Configuration = merge(commonConfig, {
       remotes: {
         list: 'list@http://localhost:4001/remoteEntry.js'
       },
-      shared: dependencies
+      shared: {
+        ...dependencies,
+        react: {
+          singleton: true,
+          requiredVersion: dependencies['react']
+        },
+        'react-dom': {
+          singleton: true,
+          requiredVersion: dependencies['react-dom']
+        }
+      }
     })
   ],
   devServer: {
